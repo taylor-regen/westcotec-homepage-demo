@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Westcotec | Intelligent Traffic Safety &amp; Smart City Solutions</title>
+  <meta name="description" content="Designed and manufactured in Norfolk since 2001. LED speed signs, VMS, collision avoidance and smart city systems — employee-owned, CE, UKCA and UKNI marked." />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0a0b;
+      --ink-soft: #1a1a1c;
+      --muted: #6e6e73;
+      --line: rgba(10, 10, 11, 0.1);
+      --paper: #f4f4f5;
+      --white: #ffffff;
+      --signal: #e10600;
+      --signal-glow: #ff2b1a;
+      --amber: #ffb020;
+      --max: 1180px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --font-sans: "Syne", system-ui, sans-serif;
+      --font-serif: "Instrument Serif", Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .page-shell {
+      max-width: 1440px;
+      margin: 0 auto;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .wrap {
+      width: min(100% - 3rem, var(--max));
+      margin-inline: auto;
+    }
+
+    /* —— Nav —— */
+    .site-header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 30;
+      padding: 1.25rem 0;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .logo img {
+      height: 34px;
+      width: auto;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: color 0.25s var(--ease);
+    }
+    .nav-links a:hover { color: #fff; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.6rem 0.7rem 0.6rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      transition: transform 0.35s var(--ease), background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-arrow {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .btn-arrow svg { width: 12px; height: 12px; }
+    .btn-light {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.32);
+      backdrop-filter: blur(10px);
+    }
+    .btn-light .btn-arrow { background: #fff; color: var(--ink); }
+    .btn-dark {
+      background: var(--ink);
+      color: #fff;
+      border: 1px solid var(--ink);
+    }
+    .btn-dark .btn-arrow { background: var(--signal); color: #fff; }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn-outline .btn-arrow { background: var(--ink); color: #fff; }
+    .btn-pill {
+      padding: 0.55rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid var(--ink);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: background 0.3s var(--ease), color 0.3s var(--ease);
+    }
+    .btn-pill:hover { background: var(--ink); color: #fff; }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+    }
+
+    /* —— Hero —— */
+    .hero {
+      position: relative;
+      min-height: min(100vh, 920px);
+      background:
+        radial-gradient(ellipse 70% 55% at 75% 40%, rgba(225, 6, 0, 0.18), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(255, 176, 32, 0.08), transparent 55%),
+        linear-gradient(165deg, #050506 0%, #121214 48%, #0a0a0b 100%);
+      color: #fff;
+      display: flex;
+      align-items: flex-end;
+      padding: 8.5rem 0 4.5rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 75%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: end;
+      width: min(100% - 3rem, var(--max));
+      margin-inline: auto;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1.4rem;
+    }
+    .hero-kicker .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--signal);
+      box-shadow: 0 0 0 0 rgba(225, 6, 0, 0.55);
+      animation: pulse 2.2s var(--ease) infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(225, 6, 0, 0.55); }
+      70% { box-shadow: 0 0 0 12px rgba(225, 6, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(225, 6, 0, 0); }
+    }
+
+    .hero-title {
+      margin: 0 0 1.35rem;
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: clamp(2.35rem, 5.2vw, 4.35rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      max-width: 11ch;
+      color: #fff;
+      cursor: default;
+      transition: color 0.45s var(--ease), filter 0.45s var(--ease), text-shadow 0.45s var(--ease);
+    }
+    .hero-title.led-on,
+    .hero-title:hover {
+      color: transparent;
+      background-image: radial-gradient(circle closest-side, #fff 0%, #fff 28%, var(--signal-glow) 42%, rgba(225, 6, 0, 0.95) 68%, transparent 72%);
+      background-size: 0.18em 0.18em;
+      background-position: 0 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 0 10px rgba(255, 43, 26, 0.55)) drop-shadow(0 0 22px rgba(225, 6, 0, 0.35));
+      animation: led-flicker 2.8s ease-in-out infinite;
+    }
+    @keyframes led-flicker {
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 43, 26, 0.55)) drop-shadow(0 0 22px rgba(225, 6, 0, 0.35)); }
+      48% { filter: drop-shadow(0 0 12px rgba(255, 43, 26, 0.7)) drop-shadow(0 0 28px rgba(225, 6, 0, 0.45)); }
+      52% { filter: drop-shadow(0 0 6px rgba(255, 43, 26, 0.35)) drop-shadow(0 0 14px rgba(225, 6, 0, 0.2)); }
+    }
+
+    .hero-lede {
+      margin: 0 0 2rem;
+      max-width: 38ch;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+    }
+    .hero-hint {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+
+    .hero-visual {
+      position: relative;
+      justify-self: end;
+      width: min(100%, 380px);
+    }
+    .hero-visual img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.55));
+      animation: float 5.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .hero-led-strip {
+      position: absolute;
+      left: -18%;
+      top: 12%;
+      height: 62%;
+      width: auto;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 18px rgba(225, 6, 0, 0.65));
+      animation: float 6.5s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+    .hero-badge {
+      position: absolute;
+      right: -6%;
+      bottom: 8%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
+      max-width: 180px;
+      animation: fade-up 0.9s var(--ease) both;
+    }
+    .hero-badge strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.15rem;
+    }
+    .hero-badge span {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.35;
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .hero { min-height: auto; padding: 7.5rem 0 3.5rem; align-items: flex-start; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-title { max-width: 14ch; }
+      .hero-visual { justify-self: center; order: -1; width: min(100%, 260px); margin-bottom: 0.5rem; }
+      .hero-led-strip { left: -8%; height: 55%; }
+      .hero-badge { right: 0; bottom: 0; }
+    }
+
+    /* —— Trust bar —— */
+    .trust {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 1.35rem 0;
+    }
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem 2rem;
+    }
+    .trust-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 600;
+    }
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .trust-badges img {
+      height: 36px;
+      width: auto;
+      opacity: 0.85;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.25s;
+    }
+    .trust-badges img:hover { opacity: 1; }
+
+    /* —— About —— */
+    .about {
+      padding: 5.5rem 0 4.5rem;
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin: 0 0 0.85rem;
+    }
+    .section-title {
+      margin: 0 0 1.1rem;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+    .about-copy p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 48ch;
+    }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.25rem;
+    }
+    .stat {
+      padding: 1.25rem 1.15rem;
+      background: var(--paper);
+      border-radius: 12px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    @media (max-width: 800px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .stat-row { grid-template-columns: 1fr; }
+    }
+
+    /* —— Products carousel —— */
+    .products {
+      padding: 1rem 0 5rem;
+      background: var(--white);
+    }
+    .products-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-bottom: 1.15rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 1.75rem;
+    }
+    .products-head h2 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(1.85rem, 3vw, 2.5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .products-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .carousel-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--ink);
+      display: grid;
+      place-items: center;
+      transition: background 0.3s var(--ease), color 0.3s var(--ease), opacity 0.3s;
+    }
+    .carousel-btn:hover { background: var(--ink); color: #fff; }
+    .carousel-btn:disabled { opacity: 0.28; cursor: default; }
+    .carousel-btn svg { width: 16px; height: 16px; }
+
+    .carousel-viewport {
+      overflow: hidden;
+      margin-inline: calc((100% - min(100% - 3rem, var(--max))) / -2);
+      padding-inline: calc((100% - min(100% - 3rem, var(--max))) / 2);
+    }
+    .carousel-track {
+      display: flex;
+      gap: 1.25rem;
+      transition: transform 0.55s var(--ease);
+      will-change: transform;
+    }
+    .product-card {
+      flex: 0 0 calc((100% - 3.75rem) / 4);
+      min-width: 220px;
+      scroll-snap-align: start;
+    }
+    .product-media {
+      aspect-ratio: 3 / 4;
+      background: var(--paper);
+      display: grid;
+      place-items: center;
+      padding: 1.75rem;
+      margin-bottom: 0.85rem;
+      overflow: hidden;
+      transition: background 0.35s var(--ease);
+    }
+    .product-card:hover .product-media { background: #ebebed; }
+    .product-media img {
+      width: 88%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.55s var(--ease);
+    }
+    .product-card:hover .product-media img { transform: scale(1.05); }
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .product-meta span:last-child {
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1100px) {
+      .product-card { flex-basis: calc((100% - 2.5rem) / 3); }
+    }
+    @media (max-width: 760px) {
+      .product-card { flex-basis: calc((100% - 1.25rem) / 2); }
+      .products-head { flex-wrap: wrap; }
+    }
+    @media (max-width: 480px) {
+      .product-card { flex-basis: 78%; }
+    }
+
+    /* —— Testimonial —— */
+    .proof {
+      position: relative;
+      background: #050506;
+      color: #fff;
+      padding: 5.5rem 0;
+      overflow: hidden;
+    }
+    .proof::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.55;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 10%, transparent 80%);
+      pointer-events: none;
+    }
+    .proof-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .proof-head {
+      text-align: center;
+      margin-bottom: 2.75rem;
+    }
+    .proof-head h2 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      background: linear-gradient(180deg, #fff 20%, rgba(255,255,255,0.55) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .proof-layout {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 1.75rem;
+      align-items: stretch;
+    }
+    .proof-visual {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      min-height: 420px;
+      background: #111;
+    }
+    .proof-visual img.scene {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    .proof-visual .led-accent {
+      position: absolute;
+      left: 8%;
+      top: 10%;
+      height: 55%;
+      width: auto;
+      z-index: 2;
+      filter: drop-shadow(0 0 20px rgba(225, 6, 0, 0.7));
+      animation: float 5s ease-in-out infinite;
+    }
+    .proof-visual .caption {
+      position: absolute;
+      left: 1.1rem;
+      right: 1.1rem;
+      bottom: 1.1rem;
+      z-index: 2;
+      padding: 0.95rem 1.05rem;
+      border-radius: 12px;
+      background: rgba(5,5,6,0.72);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.4;
+    }
+    .proof-visual .caption strong {
+      display: block;
+      color: #fff;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .testimonial-card {
+      position: relative;
+      border-radius: 22px;
+      background: #0f0f11;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 0 1px rgba(225, 6, 0, 0.35), 0 0 40px rgba(225, 6, 0, 0.18);
+      overflow: hidden;
+    }
+    .testimonial-card::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 45%;
+      height: 55%;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1.5px);
+      background-size: 10px 10px;
+      mask-image: linear-gradient(225deg, #000 10%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.55;
+    }
+    .testimonial-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--signal), #7a0500);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      color: #fff;
+      box-shadow: 0 0 0 2px rgba(225, 6, 0, 0.35);
+    }
+    .org-mark {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .quote {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      flex: 1;
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.65;
+      color: rgba(255,255,255,0.92);
+      font-weight: 400;
+    }
+    .quote p { margin: 0 0 1rem; }
+    .quote p:last-child { margin-bottom: 0; }
+    .quote-attrib {
+      position: relative;
+      z-index: 1;
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .quote-attrib strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .quote-attrib span {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 860px) {
+      .proof-layout { grid-template-columns: 1fr; }
+      .proof-visual { min-height: 340px; }
+    }
+
+    /* —— Real world CTA strip —— */
+    .realworld {
+      background: var(--paper);
+      padding: 4.5rem 0;
+    }
+    .realworld-panel {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 2.25rem;
+      overflow: hidden;
+    }
+    .realworld-panel h2 {
+      margin: 0 0 0.75rem;
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .realworld-panel p {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      max-width: 42ch;
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .chip {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink-soft);
+    }
+    .realworld-aside {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 14px;
+      padding: 1.75rem;
+      min-height: 100%;
+    }
+    .realworld-aside .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 0.85rem;
+    }
+    .realworld-aside h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .realworld-aside p {
+      margin: 0 0 1.25rem;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 800px) {
+      .realworld-panel { grid-template-columns: 1fr; padding: 1.5rem; }
+    }
+
+    /* —— Contact —— */
+    .contact {
+      padding: 5rem 0 4rem;
+      background: var(--white);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .contact h2 {
+      margin: 0 0 0.85rem;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.85rem);
+      font-weight: 400;
+    }
+    .contact-lede {
+      margin: 0 0 1.75rem;
+      color: var(--muted);
+      max-width: 36ch;
+    }
+    .contact-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .contact-list li {
+      display: grid;
+      gap: 0.15rem;
+    }
+    .contact-list .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .contact-list a,
+    .contact-list span {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .fake-form {
+      display: grid;
+      gap: 0.85rem;
+      padding: 1.75rem;
+      background: var(--paper);
+      border-radius: 16px;
+    }
+    .fake-form label {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .fake-form input,
+    .fake-form textarea {
+      border: 1px solid transparent;
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font: inherit;
+      color: var(--ink);
+      resize: vertical;
+    }
+    .fake-form input:focus,
+    .fake-form textarea:focus {
+      outline: none;
+      border-color: rgba(225, 6, 0, 0.35);
+    }
+    .fake-form .form-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    @media (max-width: 800px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* —— Footer —— */
+    .site-footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.65);
+      padding: 2.5rem 0;
+    }
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .footer-row img { height: 28px; width: auto; opacity: 0.9; }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.82rem;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy {
+      width: 100%;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="logo" href="#" aria-label="Westcotec home">
+          <img src="assets/logo-white.png" alt="Westcotec" />
+        </a>
+        <nav aria-label="Primary">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#proof">Case studies</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a class="btn btn-light" href="#contact">
+          Talk to us
+          <span class="btn-arrow" aria-hidden="true">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Hero">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-kicker"><span class="pulse" aria-hidden="true"></span> Designed &amp; built in Norfolk</p>
+          <h1 class="hero-title" id="hero-title">Intelligent Traffic Safety and Smart City Solutions.</h1>
+          <p class="hero-lede">
+            New approaches to old problems — LED speed signs, specialist warning systems and above-ground collision avoidance, engineered for authorities who need data as much as deterrence.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#products">
+              Our products
+              <span class="btn-arrow" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="btn btn-light" href="#proof" style="background: transparent;">
+              See Pembrokeshire
+              <span class="btn-arrow" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+          <p class="hero-hint">Hover the headline — watch it light up like a Westcotec LED matrix</p>
+        </div>
+        <div class="hero-visual">
+          <img class="hero-led-strip" src="assets/led-dots.png" alt="" aria-hidden="true" />
+          <img src="assets/hero-sign.png" alt="Westcotec LED speed indicator displaying Slow Down" />
+          <div class="hero-badge">
+            <strong>Since 2001</strong>
+            <span>Employee-owned manufacture, CE · UKCA · UKNI marked</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="wrap trust-row">
+        <p class="trust-label">Trusted standards</p>
+        <div class="trust-badges">
+          <img src="assets/badge-bsi.png" alt="BSI" />
+          <img src="assets/badge-topas.png" alt="TOPAS" />
+          <img src="assets/badge-chas.png" alt="CHAS" />
+          <img src="assets/badge-madein.png" alt="Made in Britain" />
+        </div>
+      </div>
+    </div>
+
+    <section class="about" id="about">
+      <div class="wrap about-grid">
+        <div>
+          <p class="section-eyebrow">About us</p>
+          <h2 class="section-title">Built in Norfolk. Proven on roads across Europe and beyond.</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            Since 2001, Westcotec have designed and manufactured in their Norfolk factory — high-quality, rigorously tested materials and components, with manufacture, technical support, R&amp;D, sales and marketing across two joined sites.
+          </p>
+          <p>
+            That flexibility has led to custom work not only in the UK but across Northern Europe, Asia and the Middle East. In 2018, Westcotec became a fully-fledged employee-owned company — one of only a few road safety equipment manufacturers with CE, UKCA and UKNI marks across their range.
+          </p>
+          <div class="stat-row">
+            <div class="stat">
+              <strong>2001</strong>
+              <span>Founded in Norfolk</span>
+            </div>
+            <div class="stat">
+              <strong>2018</strong>
+              <span>Employee-owned</span>
+            </div>
+            <div class="stat">
+              <strong>75+</strong>
+              <span>SIDs in Pembrokeshire alone</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="products">
+      <div class="wrap">
+        <div class="products-head">
+          <div>
+            <p class="section-eyebrow">Our signs</p>
+            <h2>Featured systems</h2>
+          </div>
+          <div class="products-controls">
+            <a class="btn-pill" href="#">More <span aria-hidden="true">→</span></a>
+            <button class="carousel-btn" id="prev-products" aria-label="Previous products" type="button">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="carousel-btn" id="next-products" aria-label="Next products" type="button">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="product-track">
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-sid.png" alt="Speed Indicator Device" /></div>
+            <div class="product-meta"><span>Speed Indicator Device</span><span>SID</span></div>
+          </article>
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-speed.png" alt="Speed roundel sign" /></div>
+            <div class="product-meta"><span>Speed Signs</span><span>Roundel</span></div>
+          </article>
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-vms.png" alt="Variable Message Sign" /></div>
+            <div class="product-meta"><span>Variable Message Signs</span><span>VMS</span></div>
+          </article>
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-cas.png" alt="Collision Avoidance System" /></div>
+            <div class="product-meta"><span>Collision Avoidance</span><span>C.A.S</span></div>
+          </article>
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-overheight.png" alt="Over Height Display" /></div>
+            <div class="product-meta"><span>Over Height Display</span><span>Bridge</span></div>
+          </article>
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-pedestrian.png" alt="Pedestrian and Cycle Detection" /></div>
+            <div class="product-meta"><span>Pedestrian &amp; Cycle</span><span>Detect</span></div>
+          </article>
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-school.png" alt="School warning systems" /></div>
+            <div class="product-meta"><span>School Systems</span><span>Safety</span></div>
+          </article>
+          <article class="product-card">
+            <div class="product-media"><img src="assets/product-air-quality.png" alt="Air Quality Monitoring" /></div>
+            <div class="product-meta"><span>Air Quality Monitoring</span><span>Smart</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" id="proof">
+      <div class="wrap proof-inner">
+        <div class="proof-head">
+          <p class="section-eyebrow" style="color: var(--signal-glow);">From the road</p>
+          <h2>Authorities on our products.</h2>
+        </div>
+        <div class="proof-layout">
+          <aside class="proof-visual">
+            <img class="scene" src="assets/pembrokeshire.jpg" alt="Westcotec speed sign installed in Pembrokeshire" />
+            <img class="led-accent" src="assets/led-dots.png" alt="" aria-hidden="true" />
+            <div class="caption">
+              <strong>Case study · Pembrokeshire</strong>
+              75 SIDs and 33 speed roundels supporting the County Council’s road safety programme.
+            </div>
+          </aside>
+          <article class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="avatar" aria-hidden="true">CW</div>
+              <div class="org-mark">Pembrokeshire County Council</div>
+            </div>
+            <blockquote class="quote">
+              <p>“We have an excellent relationship with Westcotec,” Clare says. “The purchase of their signs has been a simple process. There are no hidden costs so we haven’t had to go back for additional funding. They have also honoured their prices at a time when costs have been rising.</p>
+              <p>“They are experts in their field, they understand that road safety is a complex issue and they also appreciate our situation and our obligations to our local communities and the people elected to represent them. I am happy to recommend Westcotec as a trusted supplier of technology that best suits our needs.”</p>
+            </blockquote>
+            <div class="quote-attrib">
+              <div>
+                <strong>Clare Williams</strong>
+                <span>Senior Traffic &amp; Road Safety Engineer</span>
+              </div>
+              <a class="btn-pill" href="#" style="border-color: rgba(255,255,255,0.35); color: #fff;">Read case study →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="realworld">
+      <div class="wrap">
+        <div class="realworld-panel">
+          <div>
+            <p class="section-eyebrow">Why councils choose Westcotec</p>
+            <h2>Good value on the road — not just on a spreadsheet.</h2>
+            <p>
+              Data recording as standard. Six-year warranty. Solar where it makes sense. Engineers who turn up, install, and stay reachable when something needs fixing.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Data collection built-in</span>
+              <span class="chip">Solar &amp; mains options</span>
+              <span class="chip">6-year warranty</span>
+              <span class="chip">UK manufacture</span>
+            </div>
+            <a class="btn btn-dark" href="#contact">
+              Request a conversation
+              <span class="btn-arrow" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+          <aside class="realworld-aside">
+            <p class="label">From Clare’s advice</p>
+            <h3>“Bear in mind that in this specialist area, good value on a spreadsheet doesn’t always translate to best value out on the road.”</h3>
+            <p>Procurement pressure is real — so is warranty call-out wait time. Westcotec’s edge is the whole system: signs, data, and a relationship that holds up after install day.</p>
+            <a class="btn btn-light" href="#proof" style="padding-inline: 1rem;">
+              Back to the story
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="section-eyebrow">Contact</p>
+          <h2>Let’s talk traffic safety.</h2>
+          <p class="contact-lede">Sales, technical support and custom briefings — from Dereham to wherever your network needs a smarter sign.</p>
+          <ul class="contact-list">
+            <li>
+              <span class="label">Email</span>
+              <a href="mailto:sales@westcotec.co.uk">sales@westcotec.co.uk</a>
+            </li>
+            <li>
+              <span class="label">Phone</span>
+              <a href="tel:+441362853124">01362 853124</a>
+            </li>
+            <li>
+              <span class="label">Visit</span>
+              <span>34 Bertie Ward Way, Dereham NR19 1TE</span>
+            </li>
+          </ul>
+        </div>
+        <form class="fake-form" action="#" method="post" onsubmit="return false;">
+          <label>Name
+            <input type="text" name="name" placeholder="Your name" autocomplete="name" />
+          </label>
+          <label>Email
+            <input type="email" name="email" placeholder="you@authority.gov.uk" autocomplete="email" />
+          </label>
+          <label>Message
+            <textarea name="message" rows="4" placeholder="Tell us about the site or the challenge…"></textarea>
+          </label>
+          <button class="btn btn-dark" type="button">
+            Send message
+            <span class="btn-arrow" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <p class="form-note">Demo only — this form doesn’t submit.</p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <img src="assets/logo-white.png" alt="Westcotec" />
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Carbon Reduction Plan</a></li>
+          <li><a href="#">Modern Slavery Policy</a></li>
+          <li><a href="#">Westconnect Login</a></li>
+        </ul>
+        <p class="footer-copy">© Westcotec Ltd. Homepage concept demo — not a live site rebuild.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var track = document.getElementById("product-track");
+      var prev = document.getElementById("prev-products");
+      var next = document.getElementById("next-products");
+      if (!track || !prev || !next) return;
+
+      var index = 0;
+
+      function cardStep() {
+        var card = track.querySelector(".product-card");
+        if (!card) return 280;
+        var styles = window.getComputedStyle(track);
+        var gap = parseFloat(styles.columnGap || styles.gap) || 20;
+        return card.getBoundingClientRect().width + gap;
+      }
+
+      function visibleCount() {
+        var viewport = track.parentElement.getBoundingClientRect().width;
+        return Math.max(1, Math.floor(viewport / cardStep()));
+      }
+
+      function maxIndex() {
+        var total = track.querySelectorAll(".product-card").length;
+        return Math.max(0, total - visibleCount());
+      }
+
+      function render() {
+        index = Math.min(index, maxIndex());
+        track.style.transform = "translateX(" + (-index * cardStep()) + "px)";
+        prev.disabled = index <= 0;
+        next.disabled = index >= maxIndex();
+      }
+
+      prev.addEventListener("click", function () {
+        index = Math.max(0, index - 1);
+        render();
+      });
+      next.addEventListener("click", function () {
+        index = Math.min(maxIndex(), index + 1);
+        render();
+      });
+
+      window.addEventListener("resize", render);
+      render();
+
+      /* Soft LED tease on first viewport for curiosity */
+      var title = document.getElementById("hero-title");
+      if (title && window.matchMedia("(hover: hover)").matches) {
+        setTimeout(function () {
+          title.classList.add("led-on");
+          setTimeout(function () { title.classList.remove("led-on"); }, 1600);
+        }, 1200);
+      }
+    })();
+  </script>
+</body>
+</html>
