@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Westcotec | Intelligent Traffic Safety &amp; Smart City Solutions</title>
-  <meta name="description" content="Designed and manufactured in Norfolk since 2001. LED speed signs, VMS, collision avoidance and smart city systems — employee-owned, CE, UKCA and UKNI marked." />
+  <meta name="description" content="Designed and manufactured in Norfolk since 2001. LED speed signs, VMS, collision avoidance and smart city systems. Employee-owned, CE, UKCA and UKNI marked." />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,14 +17,12 @@
       --line: rgba(255, 255, 255, 0.08);
       --text: #ffffff;
       --muted: #9a9a9a;
-      --accent: #f5a623;
-      --accent-soft: rgba(245, 166, 35, 0.15);
-      --signal: #e10600;
-      --signal-glow: #ff2b1a;
+      --accent: #f28c38;
+      --accent-end: #c62828;
       --max: 1120px;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
       --font: "Manrope", system-ui, sans-serif;
-      --radius: 18px;
+      --radius: 16px;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -44,24 +42,22 @@
       width: min(100% - 3rem, var(--max));
       margin-inline: auto;
     }
-    .section {
-      padding: 5.5rem 0;
-    }
+    .section { padding: 4.5rem 0; }
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       gap: 2rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
     .section-head p {
       margin: 0;
-      max-width: 34ch;
+      max-width: 36ch;
       color: var(--muted);
       font-size: 0.95rem;
     }
     .eyebrow {
-      margin: 0 0 0.75rem;
+      margin: 0 0 0.65rem;
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.16em;
@@ -70,7 +66,7 @@
     }
     .h2 {
       margin: 0;
-      font-size: clamp(1.85rem, 3.4vw, 2.75rem);
+      font-size: clamp(1.75rem, 3.2vw, 2.55rem);
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.1;
@@ -81,7 +77,7 @@
       position: absolute;
       inset: 0 0 auto;
       z-index: 20;
-      padding: 1.4rem 0;
+      padding: 1.35rem 0;
     }
     .nav {
       display: flex;
@@ -111,27 +107,30 @@
       align-items: center;
       justify-content: center;
       gap: 0.55rem;
-      border-radius: 999px;
+      border-radius: 10px;
       font-weight: 700;
       font-size: 0.9rem;
       padding: 0.85rem 1.35rem;
-      transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+      transition: transform 0.3s var(--ease), filter 0.3s var(--ease), border-color 0.3s var(--ease);
     }
     .btn:hover { transform: translateY(-1px); }
-    .btn-accent {
-      background: var(--accent);
-      color: #111;
+    .btn-gradient {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-end) 100%);
+      color: #fff;
+      border: 0;
     }
-    .btn-accent:hover { background: #ffb83a; }
+    .btn-gradient:hover { filter: brightness(1.08); }
     .btn-ghost {
       background: transparent;
       color: #fff;
       border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
     }
     .btn-ghost:hover { border-color: #fff; }
     .btn-solid {
       background: #fff;
       color: #111;
+      border-radius: 999px;
     }
     .btn svg { width: 14px; height: 14px; }
 
@@ -142,252 +141,223 @@
 
     /* Hero */
     .hero {
-      padding: 8.5rem 0 4rem;
-      min-height: min(100vh, 860px);
-      display: flex;
-      align-items: center;
+      padding: 8rem 0 3.5rem;
       background:
-        radial-gradient(ellipse 50% 45% at 78% 42%, rgba(245, 166, 35, 0.12), transparent 60%),
-        radial-gradient(ellipse 40% 35% at 15% 70%, rgba(225, 6, 0, 0.08), transparent 55%),
+        radial-gradient(ellipse 45% 40% at 80% 35%, rgba(242, 140, 56, 0.12), transparent 60%),
         var(--bg);
     }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
-      gap: 3rem;
+      gap: 2.75rem;
       align-items: center;
     }
     .hero-copy h1 {
-      margin: 0 0 1.15rem;
-      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin: 0 0 1.1rem;
+      font-size: clamp(2.25rem, 4.6vw, 3.75rem);
       font-weight: 800;
       letter-spacing: -0.045em;
-      line-height: 1.02;
-      max-width: 11ch;
+      line-height: 1.04;
+      max-width: 12ch;
       color: #fff;
-      cursor: default;
-      transition: filter 0.45s var(--ease);
-    }
-    .hero-copy h1.led-on,
-    .hero-copy h1:hover {
-      color: transparent;
-      background-image: radial-gradient(circle closest-side, #fff 0%, #fff 28%, var(--signal-glow) 42%, rgba(225, 6, 0, 0.95) 68%, transparent 72%);
-      background-size: 0.17em 0.17em;
-      -webkit-background-clip: text;
-      background-clip: text;
-      filter: drop-shadow(0 0 10px rgba(255, 43, 26, 0.55)) drop-shadow(0 0 22px rgba(225, 6, 0, 0.35));
-      animation: led-flicker 2.8s ease-in-out infinite;
-    }
-    @keyframes led-flicker {
-      0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 43, 26, 0.55)) drop-shadow(0 0 22px rgba(225, 6, 0, 0.35)); }
-      50% { filter: drop-shadow(0 0 14px rgba(255, 43, 26, 0.7)) drop-shadow(0 0 28px rgba(225, 6, 0, 0.45)); }
     }
     .hero-lede {
-      margin: 0 0 1.75rem;
-      max-width: 38ch;
+      margin: 0 0 1.6rem;
+      max-width: 40ch;
       color: var(--muted);
-      font-size: 1.05rem;
-      font-weight: 400;
+      font-size: 1.02rem;
     }
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 0.85rem;
-      margin-bottom: 2.5rem;
-    }
-    .hero-hint {
-      margin: 0;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-    }
-    .hero-visual {
-      position: relative;
-      display: grid;
-      place-items: center;
-    }
-    .hero-visual .sign {
-      width: min(100%, 340px);
-      filter: drop-shadow(0 28px 50px rgba(0,0,0,0.55));
-      animation: float 5.5s ease-in-out infinite;
-    }
-    .hero-visual .led {
-      position: absolute;
-      left: 4%;
-      top: 14%;
-      height: 48%;
-      width: auto;
-      opacity: 0.95;
-      filter: drop-shadow(0 0 16px rgba(225, 6, 0, 0.65));
-      animation: float 6.2s ease-in-out infinite reverse;
-      pointer-events: none;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      margin-bottom: 2.25rem;
     }
     .hero-stats {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      width: min(100%, 340px);
-      margin-inline: auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem 1.75rem;
+      max-width: 420px;
+    }
+    .hero-stats div {
+      min-width: 0;
     }
     .hero-stats strong {
       display: block;
-      font-size: 1.65rem;
+      font-size: clamp(1.5rem, 2.5vw, 1.85rem);
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
     }
     .hero-stats span {
-      font-size: 0.8rem;
+      display: block;
+      font-size: 0.82rem;
       color: var(--muted);
+      line-height: 1.35;
     }
-
-    @media (max-width: 900px) {
-      .hero { min-height: auto; padding-top: 7rem; }
-      .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-copy h1 { max-width: 14ch; }
-      .hero-visual { order: -1; }
-      .hero-visual .sign { width: min(100%, 240px); }
-      .section-head { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* Trust */
-    .trust {
-      padding: 1.75rem 0 3rem;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .trust-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem 2.75rem;
-    }
-    .trust-row img {
-      height: 42px;
-      width: auto;
-      opacity: 0.7;
-      filter: brightness(0) saturate(100%) invert(72%) sepia(62%) saturate(700%) hue-rotate(358deg) brightness(101%) contrast(96%);
-      transition: opacity 0.25s;
-    }
-    .trust-row img:hover { opacity: 1; }
-
-    /* About + bento */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 2.5rem;
-      align-items: end;
-      margin-bottom: 2.5rem;
-    }
-    .about-grid p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.02rem;
-      max-width: 46ch;
-    }
-    .bento {
-      display: grid;
-      grid-template-columns: 1.3fr 0.85fr 0.85fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 0.9rem;
-      min-height: 420px;
-    }
-    .bento-item {
+    .hero-visual {
       position: relative;
-      border-radius: var(--radius);
+      border-radius: 22px;
       overflow: hidden;
+      aspect-ratio: 1 / 1;
+      max-height: 460px;
       background: var(--surface);
-      min-height: 160px;
+      border: 1px solid var(--line);
     }
-    .bento-item img {
+    .hero-visual img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .bento-item.wide {
-      grid-row: 1 / -1;
+
+    @media (max-width: 900px) {
+      .hero { padding-top: 7rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+      .hero-copy h1 { max-width: 14ch; }
+      .hero-visual {
+        order: -1;
+        max-height: 320px;
+        aspect-ratio: 16 / 11;
+      }
+      .section-head { flex-direction: column; align-items: flex-start; }
     }
-    .bento-item.tall {
-      grid-row: 1 / -1;
+
+    /* Trust: text chips, not broken badge filters */
+    .trust {
+      padding: 1.5rem 0;
+      border-block: 1px solid var(--line);
     }
-    .bento-item .label {
-      position: absolute;
-      left: 1rem;
-      bottom: 1rem;
-      right: 1rem;
-      padding: 0.7rem 0.9rem;
-      border-radius: 12px;
-      background: rgba(5,5,5,0.72);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.78rem;
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+    }
+    .trust-chip {
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
     }
-    .bento-product {
+
+    /* About puzzle */
+    .about-puzzle {
       display: grid;
-      place-items: center;
-      padding: 1.5rem;
-      background: linear-gradient(180deg, #161616, #0d0d0d);
+      grid-template-columns: 1.15fr 0.95fr 0.9fr;
+      grid-template-rows: auto auto;
+      gap: 0.75rem;
     }
-    .bento-product img {
-      width: 78%;
-      height: auto;
-      object-fit: contain;
+    .tile {
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-height: 0;
+    }
+    .tile-copy {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 1.6rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      grid-row: 1 / -1;
+    }
+    .tile-copy .h2 { margin-bottom: 0.85rem; }
+    .tile-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 36ch;
+    }
+    .tile-copy .mini-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-top: 1.35rem;
+    }
+    .tile-copy .mini-stats strong {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .tile-copy .mini-stats span {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .tile-media {
+      position: relative;
+      background: var(--surface);
+      min-height: 150px;
+    }
+    .tile-media.tall { min-height: 220px; }
+    .tile-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    .tile-media .cap {
+      position: absolute;
+      left: 0.75rem;
+      bottom: 0.75rem;
+      z-index: 1;
+      padding: 0.4rem 0.65rem;
+      border-radius: 8px;
+      background: rgba(5,5,5,0.7);
+      backdrop-filter: blur(8px);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .bento {
+      .about-puzzle {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
-        min-height: 0;
       }
-      .bento-item.wide,
-      .bento-item.tall { grid-row: auto; min-height: 220px; }
+      .tile-copy {
+        grid-column: 1 / -1;
+        grid-row: auto;
+      }
+      .tile-media.tall { min-height: 180px; }
     }
     @media (max-width: 560px) {
-      .bento { grid-template-columns: 1fr; }
+      .about-puzzle { grid-template-columns: 1fr; }
+      .tile-media,
+      .tile-media.tall { min-height: 180px; position: relative; }
     }
 
     /* Products */
-    .products .section-head { margin-bottom: 2rem; }
+    .products .section-head { margin-bottom: 1.75rem; }
     .carousel-viewport { overflow: hidden; }
     .carousel-track {
       display: flex;
-      gap: 1.1rem;
+      gap: 1rem;
       transition: transform 0.55s var(--ease);
     }
     .product-card {
-      flex: 0 0 calc((100% - 3.3rem) / 4);
+      flex: 0 0 calc((100% - 3rem) / 4);
       min-width: 200px;
     }
     .product-media {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 1 / 1;
       border-radius: var(--radius);
-      background: var(--surface);
+      background: #fff;
       display: grid;
       place-items: center;
-      padding: 1.5rem;
-      margin-bottom: 0.9rem;
-      border: 1px solid var(--line);
-      transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
-    }
-    .product-card:hover .product-media {
-      border-color: rgba(245, 166, 35, 0.35);
-      background: var(--surface-2);
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+      overflow: hidden;
     }
     .product-media img {
-      width: 82%;
+      width: 96%;
       max-height: 100%;
       object-fit: contain;
       transition: transform 0.45s var(--ease);
@@ -407,7 +377,7 @@
       display: flex;
       justify-content: flex-end;
       gap: 0.65rem;
-      margin-top: 1.75rem;
+      margin-top: 1.5rem;
     }
     .carousel-btn {
       width: 44px;
@@ -424,68 +394,60 @@
     .carousel-btn svg { width: 16px; height: 16px; }
 
     @media (max-width: 1100px) {
-      .product-card { flex-basis: calc((100% - 2.2rem) / 3); }
+      .product-card { flex-basis: calc((100% - 2rem) / 3); }
     }
     @media (max-width: 760px) {
-      .product-card { flex-basis: calc((100% - 1.1rem) / 2); }
+      .product-card { flex-basis: calc((100% - 1rem) / 2); }
     }
     @media (max-width: 480px) {
       .product-card { flex-basis: 82%; }
     }
 
-    /* Testimonial */
+    /* Proof */
     .proof {
       background: var(--surface);
       border-block: 1px solid var(--line);
     }
     .proof-layout {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 1.25rem;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 1rem;
       align-items: stretch;
     }
     .proof-visual {
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
-      min-height: 460px;
+      min-height: 280px;
+      max-height: 360px;
       background: #0a0a0a;
     }
-    .proof-visual .scene {
-      position: absolute;
-      inset: 0;
+    .proof-visual img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-    .proof-visual .led {
       position: absolute;
-      left: 7%;
-      top: 10%;
-      height: 52%;
-      z-index: 2;
-      filter: drop-shadow(0 0 18px rgba(225, 6, 0, 0.7));
-      animation: float 5s ease-in-out infinite;
+      inset: 0;
     }
     .proof-visual .caption {
       position: absolute;
-      left: 1rem;
-      right: 1rem;
-      bottom: 1rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      bottom: 0.85rem;
       z-index: 2;
-      padding: 0.85rem 1rem;
-      border-radius: 12px;
+      padding: 0.75rem 0.9rem;
+      border-radius: 10px;
       background: rgba(5,5,5,0.75);
       border: 1px solid rgba(255,255,255,0.1);
       backdrop-filter: blur(10px);
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: rgba(255,255,255,0.78);
     }
     .proof-visual .caption strong {
       display: block;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
       color: var(--accent);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
@@ -493,7 +455,7 @@
       background: var(--bg);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 2rem;
+      padding: 1.5rem 1.6rem;
       display: flex;
       flex-direction: column;
     }
@@ -502,20 +464,21 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.1rem;
     }
     .avatar {
-      width: 46px;
-      height: 46px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #c47a00);
-      color: #111;
+      background: linear-gradient(90deg, var(--accent), var(--accent-end));
+      color: #fff;
       display: grid;
       place-items: center;
       font-weight: 800;
+      font-size: 0.85rem;
     }
     .org {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -524,15 +487,15 @@
     .quote {
       margin: 0;
       flex: 1;
-      font-size: 1.02rem;
-      line-height: 1.65;
+      font-size: 0.95rem;
+      line-height: 1.6;
       color: rgba(255,255,255,0.9);
     }
-    .quote p { margin: 0 0 1rem; }
+    .quote p { margin: 0 0 0.85rem; }
     .quote p:last-of-type { margin-bottom: 0; }
     .quote-foot {
-      margin-top: 1.75rem;
-      padding-top: 1.25rem;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
@@ -540,39 +503,39 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
-    .quote-foot strong { display: block; font-size: 0.95rem; }
-    .quote-foot span { font-size: 0.8rem; color: var(--muted); }
+    .quote-foot strong { display: block; font-size: 0.92rem; }
+    .quote-foot span { font-size: 0.78rem; color: var(--muted); }
     .read-more {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       padding: 0.55rem 0.95rem;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #111;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-end) 100%);
+      color: #fff;
       font-size: 0.78rem;
       font-weight: 700;
     }
 
     @media (max-width: 860px) {
       .proof-layout { grid-template-columns: 1fr; }
-      .proof-visual { min-height: 340px; }
+      .proof-visual { min-height: 220px; max-height: 260px; }
     }
 
-    /* Subscribe / contact */
+    /* Contact */
     .cta-panel {
-      border-radius: 22px;
+      border-radius: 20px;
       background: var(--surface-2);
       border: 1px solid var(--line);
-      padding: clamp(2rem, 4vw, 3rem);
+      padding: clamp(1.75rem, 3.5vw, 2.5rem);
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 2rem;
+      gap: 1.75rem;
       align-items: center;
     }
     .cta-panel h2 {
-      margin: 0 0 0.65rem;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin: 0 0 0.55rem;
+      font-size: clamp(1.45rem, 2.8vw, 2rem);
       font-weight: 800;
       letter-spacing: -0.035em;
     }
@@ -586,7 +549,7 @@
       gap: 0.5rem;
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 12px;
       padding: 0.35rem;
     }
     .cta-form input {
@@ -600,12 +563,12 @@
       outline: none;
     }
     .cta-form input::placeholder { color: rgba(255,255,255,0.35); }
-    .cta-form .btn { flex-shrink: 0; }
+    .cta-form .btn { flex-shrink: 0; border-radius: 10px; }
     .contact-mini {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.25rem 2rem;
-      margin-top: 1.5rem;
+      gap: 1rem 1.75rem;
+      margin-top: 1.25rem;
       font-size: 0.88rem;
       color: var(--muted);
     }
@@ -614,24 +577,24 @@
 
     @media (max-width: 800px) {
       .cta-panel { grid-template-columns: 1fr; }
-      .cta-form { flex-direction: column; border-radius: 16px; }
+      .cta-form { flex-direction: column; }
       .cta-form .btn { width: 100%; }
     }
 
     /* Footer */
     .site-footer {
-      padding: 3.5rem 0 2rem;
+      padding: 3rem 0 1.75rem;
       border-top: 1px solid var(--line);
     }
     .footer-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
       gap: 2rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
     .footer-grid h3 {
-      margin: 0 0 1rem;
-      font-size: 0.78rem;
+      margin: 0 0 0.9rem;
+      font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -642,21 +605,21 @@
       margin: 0;
       padding: 0;
       display: grid;
-      gap: 0.65rem;
+      gap: 0.55rem;
     }
     .footer-grid a {
       color: rgba(255,255,255,0.78);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
     .footer-grid a:hover { color: var(--accent); }
     .footer-brand p {
-      margin: 0.85rem 0 0;
+      margin: 0.75rem 0 0;
       color: var(--muted);
       font-size: 0.88rem;
       max-width: 28ch;
     }
     .footer-bottom {
-      padding-top: 1.5rem;
+      padding-top: 1.25rem;
       border-top: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
@@ -696,22 +659,17 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <h1 id="hero-title">Intelligent Traffic Safety and Smart City Solutions.</h1>
+          <h1>Intelligent Traffic Safety and Smart City Solutions.</h1>
           <p class="hero-lede">
-            LED speed signs, specialist warning systems and collision avoidance — designed and manufactured in Norfolk for authorities who need data as much as deterrence.
+            LED speed signs, specialist warning systems and collision avoidance. Designed and manufactured in Norfolk for authorities who need data as much as deterrence.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-accent" href="#products">
-              View products
+            <a class="btn btn-gradient" href="#products">
+              Our products
               <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a class="btn btn-ghost" href="#proof">Pembrokeshire story</a>
           </div>
-          <p class="hero-hint">Hover the headline for the LED matrix effect</p>
-        </div>
-        <div class="hero-visual">
-          <img class="led" src="assets/led-dots.png" alt="" aria-hidden="true" />
-          <img class="sign" src="assets/hero-sign.png" alt="Westcotec LED speed indicator displaying Slow Down" />
           <div class="hero-stats">
             <div>
               <strong>2001</strong>
@@ -723,45 +681,59 @@
             </div>
           </div>
         </div>
+        <div class="hero-visual">
+          <img src="assets/hero-solar.png" alt="Solar-powered Westcotec speed sign installed roadside" />
+        </div>
       </div>
     </section>
 
     <div class="trust">
       <div class="wrap trust-row">
-        <img src="assets/badge-bsi.png" alt="BSI" />
-        <img src="assets/badge-topas.png" alt="TOPAS" />
-        <img src="assets/badge-chas.png" alt="CHAS" />
-        <img src="assets/badge-madein.png" alt="Made in Britain" />
+        <span class="trust-chip">CE marked</span>
+        <span class="trust-chip">UKCA · UKNI</span>
+        <span class="trust-chip">BSI</span>
+        <span class="trust-chip">TOPAS</span>
+        <span class="trust-chip">CHAS</span>
+        <span class="trust-chip">Made in Britain</span>
+        <span class="trust-chip">Employee-owned</span>
       </div>
     </div>
 
     <section class="section" id="about">
       <div class="wrap">
-        <div class="about-grid">
-          <div>
+        <div class="about-puzzle">
+          <div class="tile tile-copy">
             <p class="eyebrow">About us</p>
             <h2 class="h2">Built in Norfolk. Proven on the road.</h2>
+            <p>
+              Since 2001 Westcotec have designed and manufactured traffic safety systems in Norfolk. Employee-owned since 2018, with CE, UKCA and UKNI marks across the range, and installations across the UK, Northern Europe, Asia and the Middle East.
+            </p>
+            <div class="mini-stats">
+              <div>
+                <strong>2018</strong>
+                <span>Employee-owned</span>
+              </div>
+              <div>
+                <strong>2 sites</strong>
+                <span>Manufacture &amp; support</span>
+              </div>
+            </div>
           </div>
-          <p>
-            Since 2001 Westcotec have designed and manufactured traffic safety systems in Norfolk. Employee-owned since 2018, with CE, UKCA and UKNI marks across the range — and installations across the UK, Northern Europe, Asia and the Middle East.
-          </p>
-        </div>
-        <div class="bento">
-          <article class="bento-item wide">
-            <img src="assets/pembrokeshire.jpg" alt="Westcotec sign in Pembrokeshire" />
-            <span class="label">In the field · Pembrokeshire</span>
+          <article class="tile tile-media tall">
+            <img src="assets/about-zebrite.jpg" alt="Zebrite beacons at a pedestrian crossing" />
+            <span class="cap">Zebrite beacons</span>
           </article>
-          <article class="bento-item tall bento-product">
-            <img src="assets/product-vms.png" alt="Variable Message Sign" />
-            <span class="label">Variable Message Signs</span>
+          <article class="tile tile-media">
+            <img src="assets/about-cycle.jpg" alt="Cycle warning sign in Southampton" />
+            <span class="cap">Cycle systems</span>
           </article>
-          <article class="bento-item bento-product">
-            <img src="assets/product-speed.png" alt="Speed roundel" />
-            <span class="label">Speed Signs</span>
+          <article class="tile tile-media">
+            <img src="assets/about-ice.jpg" alt="Ice warning sign on a rural road" />
+            <span class="cap">Ice warning</span>
           </article>
-          <article class="bento-item bento-product">
-            <img src="assets/product-cas.png" alt="Collision Avoidance" />
-            <span class="label">Collision Avoidance</span>
+          <article class="tile tile-media">
+            <img src="assets/about-anpr.jpg" alt="ANPR camera installation" />
+            <span class="cap">ANPR</span>
           </article>
         </div>
       </div>
@@ -774,7 +746,7 @@
             <p class="eyebrow">Our products</p>
             <h2 class="h2">Featured systems</h2>
           </div>
-          <p>Specialist LED devices for speed, warning, detection and smart-city monitoring — browse the range.</p>
+          <p>Specialist LED devices for speed, warning, detection and smart-city monitoring.</p>
         </div>
         <div class="carousel-viewport">
           <div class="carousel-track" id="product-track">
@@ -830,12 +802,11 @@
             <p class="eyebrow">From the road</p>
             <h2 class="h2">Authorities on our products</h2>
           </div>
-          <p>Real deployments, real data — starting with Pembrokeshire County Council.</p>
+          <p>Real deployments, real data. Starting with Pembrokeshire County Council.</p>
         </div>
         <div class="proof-layout">
           <aside class="proof-visual">
-            <img class="scene" src="assets/pembrokeshire.jpg" alt="Westcotec speed sign installed in Pembrokeshire" />
-            <img class="led" src="assets/led-dots.png" alt="" aria-hidden="true" />
+            <img src="assets/pembrokeshire.jpg" alt="Westcotec speed sign installed in Pembrokeshire" />
             <div class="caption">
               <strong>Case study · Pembrokeshire</strong>
               75 SIDs and 33 speed roundels supporting the County Council’s road safety programme.
@@ -867,7 +838,7 @@
         <div class="cta-panel">
           <div>
             <h2>Talk to the team in Dereham</h2>
-            <p>Sales, technical support and custom briefings — tell us about the site or the challenge.</p>
+            <p>Sales, technical support and custom briefings. Tell us about the site or the challenge.</p>
             <div class="contact-mini">
               <span><a href="mailto:sales@westcotec.co.uk">sales@westcotec.co.uk</a></span>
               <span><a href="tel:+441362853124">01362 853124</a></span>
@@ -876,7 +847,7 @@
           </div>
           <form class="cta-form" action="#" method="post" onsubmit="return false;">
             <input type="email" name="email" placeholder="Your email address" autocomplete="email" />
-            <button class="btn btn-accent" type="button">Send message</button>
+            <button class="btn btn-gradient" type="button">Send message</button>
           </form>
         </div>
       </div>
@@ -888,7 +859,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="assets/logo-white.png" alt="Westcotec" style="height:28px;width:auto" />
-          <p>Intelligent traffic safety and smart city solutions. Designed &amp; manufactured in Norfolk.</p>
+          <p>Intelligent traffic safety and smart city solutions. Designed and manufactured in Norfolk.</p>
         </div>
         <div>
           <h3>Explore</h3>
@@ -936,7 +907,7 @@
         var card = track.querySelector(".product-card");
         if (!card) return 280;
         var styles = window.getComputedStyle(track);
-        var gap = parseFloat(styles.columnGap || styles.gap) || 18;
+        var gap = parseFloat(styles.columnGap || styles.gap) || 16;
         return card.getBoundingClientRect().width + gap;
       }
 
@@ -968,14 +939,6 @@
 
       window.addEventListener("resize", render);
       render();
-
-      var title = document.getElementById("hero-title");
-      if (title && window.matchMedia("(hover: hover)").matches) {
-        setTimeout(function () {
-          title.classList.add("led-on");
-          setTimeout(function () { title.classList.remove("led-on"); }, 1400);
-        }, 1100);
-      }
     })();
   </script>
 </body>
