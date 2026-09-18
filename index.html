@@ -106,51 +106,79 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.55rem;
-      border-radius: 10px;
+      gap: 0.45rem;
+      border-radius: 8px;
       font-weight: 700;
-      font-size: 0.9rem;
-      padding: 0.85rem 1.35rem;
-      transition: transform 0.3s var(--ease), filter 0.3s var(--ease), border-color 0.3s var(--ease);
+      font-size: 0.82rem;
+      line-height: 1;
+      padding: 0.62rem 1.1rem;
+      min-height: 38px;
+      transition: transform 0.3s var(--ease), filter 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease);
     }
     .btn:hover { transform: translateY(-1px); }
     .btn-gradient {
       background: linear-gradient(90deg, var(--accent) 0%, var(--accent-end) 100%);
       color: #fff;
-      border: 0;
+      border: 1px solid transparent;
     }
     .btn-gradient:hover { filter: brightness(1.08); }
     .btn-ghost {
       background: transparent;
       color: #fff;
       border: 1px solid rgba(255,255,255,0.28);
-      border-radius: 999px;
     }
     .btn-ghost:hover { border-color: #fff; }
     .btn-solid {
       background: #fff;
       color: #111;
-      border-radius: 999px;
+      border: 1px solid #fff;
     }
-    .btn svg { width: 14px; height: 14px; }
+    .btn svg { width: 13px; height: 13px; }
 
     @media (max-width: 860px) {
       .nav-links { display: none; }
       .nav-actions .btn-ghost { display: none; }
     }
 
-    /* Hero */
+    /* Hero: full-bleed photo fading into black */
     .hero {
-      padding: 8rem 0 3.5rem;
+      position: relative;
+      min-height: min(92vh, 820px);
+      display: flex;
+      align-items: flex-end;
+      padding: 8rem 0 4rem;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
       background:
-        radial-gradient(ellipse 45% 40% at 80% 35%, rgba(242, 140, 56, 0.12), transparent 60%),
-        var(--bg);
+        linear-gradient(90deg, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.72) 38%, rgba(5,5,5,0.28) 68%, rgba(5,5,5,0.45) 100%),
+        linear-gradient(180deg, rgba(5,5,5,0.35) 0%, transparent 28%, transparent 55%, rgba(5,5,5,0.75) 82%, var(--bg) 100%);
+      pointer-events: none;
     }
     .hero-grid {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 2.75rem;
-      align-items: center;
+      grid-template-columns: minmax(0, 560px) 1fr;
+      gap: 2rem;
+      align-items: end;
+      width: min(100% - 3rem, var(--max));
+      margin-inline: auto;
     }
     .hero-copy h1 {
       margin: 0 0 1.1rem;
@@ -162,16 +190,16 @@
       color: #fff;
     }
     .hero-lede {
-      margin: 0 0 1.6rem;
+      margin: 0 0 1.5rem;
       max-width: 40ch;
-      color: var(--muted);
+      color: rgba(255,255,255,0.72);
       font-size: 1.02rem;
     }
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.85rem;
-      margin-bottom: 2.25rem;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
     }
     .hero-stats {
       display: grid;
@@ -179,9 +207,7 @@
       gap: 1.25rem 1.75rem;
       max-width: 420px;
     }
-    .hero-stats div {
-      min-width: 0;
-    }
+    .hero-stats div { min-width: 0; }
     .hero-stats strong {
       display: block;
       font-size: clamp(1.5rem, 2.5vw, 1.85rem);
@@ -193,38 +219,22 @@
     .hero-stats span {
       display: block;
       font-size: 0.82rem;
-      color: var(--muted);
+      color: rgba(255,255,255,0.62);
       line-height: 1.35;
-    }
-    .hero-visual {
-      position: relative;
-      border-radius: 22px;
-      overflow: hidden;
-      aspect-ratio: 4 / 5;
-      max-width: 420px;
-      max-height: 400px;
-      width: 100%;
-      justify-self: end;
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-    .hero-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 35%;
     }
 
     @media (max-width: 900px) {
-      .hero { padding-top: 7rem; }
-      .hero-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+      .hero {
+        min-height: auto;
+        padding: 7rem 0 3rem;
+        align-items: flex-end;
+      }
+      .hero-grid { grid-template-columns: 1fr; }
       .hero-copy h1 { max-width: 14ch; }
-      .hero-visual {
-        order: -1;
-        justify-self: stretch;
-        max-width: none;
-        max-height: 260px;
-        aspect-ratio: 16 / 10;
+      .hero-bg::after {
+        background:
+          linear-gradient(180deg, rgba(5,5,5,0.45) 0%, rgba(5,5,5,0.35) 35%, rgba(5,5,5,0.82) 72%, var(--bg) 100%),
+          linear-gradient(90deg, rgba(5,5,5,0.55), rgba(5,5,5,0.25));
       }
       .section-head { flex-direction: column; align-items: flex-start; }
     }
@@ -350,16 +360,19 @@
     }
     .product-card {
       flex: 0 0 calc((100% - 3rem) / 4);
-      min-width: 200px;
+      min-width: 210px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
     .product-media {
+      position: relative;
       aspect-ratio: 1 / 1;
       border-radius: var(--radius);
       background: #fff;
       display: grid;
       place-items: center;
       padding: 0.85rem;
-      margin-bottom: 0.85rem;
       overflow: hidden;
     }
     .product-media img {
@@ -369,16 +382,39 @@
       transition: transform 0.45s var(--ease);
     }
     .product-card:hover .product-media img { transform: scale(1.04); }
+    .product-tag {
+      position: absolute;
+      top: 0.7rem;
+      left: 0.7rem;
+      z-index: 1;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-end) 100%);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
     .product-meta {
       display: flex;
-      justify-content: space-between;
-      gap: 0.75rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      flex-direction: column;
+      gap: 0.55rem;
     }
-    .product-meta span:last-child { color: var(--muted); }
+    .product-meta h3 {
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .product-meta .btn {
+      width: 100%;
+      font-size: 0.76rem;
+      min-height: 34px;
+      padding: 0.5rem 0.85rem;
+    }
     .carousel-footer {
       display: flex;
       justify-content: flex-end;
@@ -386,9 +422,9 @@
       margin-top: 1.5rem;
     }
     .carousel-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
       background: #fff;
       color: #111;
       display: grid;
@@ -416,22 +452,27 @@
     }
     .proof-layout {
       display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
+      grid-template-columns: 1fr 1fr;
       gap: 1rem;
       align-items: stretch;
     }
+    .proof-visual,
+    .quote-card {
+      min-height: 420px;
+      height: 100%;
+      border-radius: var(--radius);
+    }
     .proof-visual {
       position: relative;
-      border-radius: var(--radius);
       overflow: hidden;
-      min-height: 280px;
-      max-height: 360px;
       background: #0a0a0a;
+      border: 1px solid var(--line);
     }
     .proof-visual img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       position: absolute;
       inset: 0;
     }
@@ -460,10 +501,10 @@
     .quote-card {
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
       padding: 1.5rem 1.6rem;
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
     }
     .quote-top {
       display: flex;
@@ -496,6 +537,7 @@
       font-size: 0.95rem;
       line-height: 1.6;
       color: rgba(255,255,255,0.9);
+      overflow: auto;
     }
     .quote p { margin: 0 0 0.85rem; }
     .quote p:last-of-type { margin-bottom: 0; }
@@ -515,17 +557,19 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      padding: 0.55rem 0.95rem;
-      border-radius: 10px;
+      padding: 0.5rem 0.9rem;
+      min-height: 34px;
+      border-radius: 8px;
       background: linear-gradient(90deg, var(--accent) 0%, var(--accent-end) 100%);
       color: #fff;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
     }
 
     @media (max-width: 860px) {
       .proof-layout { grid-template-columns: 1fr; }
-      .proof-visual { min-height: 220px; max-height: 260px; }
+      .proof-visual,
+      .quote-card { min-height: 300px; }
     }
 
     /* Contact */
@@ -569,7 +613,7 @@
       outline: none;
     }
     .cta-form input::placeholder { color: rgba(255,255,255,0.35); }
-    .cta-form .btn { flex-shrink: 0; border-radius: 10px; }
+    .cta-form .btn { flex-shrink: 0; }
     .contact-mini {
       display: flex;
       flex-wrap: wrap;
@@ -663,7 +707,10 @@
 
   <main>
     <section class="hero">
-      <div class="wrap hero-grid">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="assets/hero-bleed.jpg" alt="" />
+      </div>
+      <div class="hero-grid">
         <div class="hero-copy">
           <h1>Intelligent Traffic Safety and Smart City Solutions.</h1>
           <p class="hero-lede">
@@ -686,9 +733,6 @@
               <span>SIDs in Pembrokeshire</span>
             </div>
           </div>
-        </div>
-        <div class="hero-visual">
-          <img src="assets/hero-solar.jpg" alt="Solar-powered Westcotec speed sign installed roadside" />
         </div>
       </div>
     </section>
@@ -757,36 +801,84 @@
         <div class="carousel-viewport">
           <div class="carousel-track" id="product-track">
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-sid.png" alt="Speed Indicator Device" /></div>
-              <div class="product-meta"><span>Speed Indicator Device</span><span>SID</span></div>
+              <div class="product-media">
+                <span class="product-tag">SID</span>
+                <img src="assets/product-sid.png" alt="Speed Indicator Device" />
+              </div>
+              <div class="product-meta">
+                <h3>Speed Indicator Device</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-speed.png" alt="Speed Signs" /></div>
-              <div class="product-meta"><span>Speed Signs</span><span>Roundel</span></div>
+              <div class="product-media">
+                <span class="product-tag">Roundel</span>
+                <img src="assets/product-speed.png" alt="Speed Signs" />
+              </div>
+              <div class="product-meta">
+                <h3>Speed Signs</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-vms.png" alt="Variable Message Signs" /></div>
-              <div class="product-meta"><span>Variable Message Signs</span><span>VMS</span></div>
+              <div class="product-media">
+                <span class="product-tag">VMS</span>
+                <img src="assets/product-vms.png" alt="Variable Message Signs" />
+              </div>
+              <div class="product-meta">
+                <h3>Variable Message Signs</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-cas.png" alt="Collision Avoidance" /></div>
-              <div class="product-meta"><span>Collision Avoidance</span><span>C.A.S</span></div>
+              <div class="product-media">
+                <span class="product-tag">C.A.S</span>
+                <img src="assets/product-cas.png" alt="Collision Avoidance" />
+              </div>
+              <div class="product-meta">
+                <h3>Collision Avoidance</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-overheight.png" alt="Over Height Display" /></div>
-              <div class="product-meta"><span>Over Height Display</span><span>Bridge</span></div>
+              <div class="product-media">
+                <span class="product-tag">Bridge</span>
+                <img src="assets/product-overheight.png" alt="Over Height Display" />
+              </div>
+              <div class="product-meta">
+                <h3>Over Height Display</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-pedestrian.png" alt="Pedestrian and Cycle Detection" /></div>
-              <div class="product-meta"><span>Pedestrian &amp; Cycle</span><span>Detect</span></div>
+              <div class="product-media">
+                <span class="product-tag">Detect</span>
+                <img src="assets/product-pedestrian.png" alt="Pedestrian and Cycle Detection" />
+              </div>
+              <div class="product-meta">
+                <h3>Pedestrian &amp; Cycle</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-school.png" alt="School Systems" /></div>
-              <div class="product-meta"><span>School Systems</span><span>Safety</span></div>
+              <div class="product-media">
+                <span class="product-tag">School</span>
+                <img src="assets/product-school.png" alt="School Systems" />
+              </div>
+              <div class="product-meta">
+                <h3>School Systems</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
             <article class="product-card">
-              <div class="product-media"><img src="assets/product-air-quality.png" alt="Air Quality Monitoring" /></div>
-              <div class="product-meta"><span>Air Quality Monitoring</span><span>Smart</span></div>
+              <div class="product-media">
+                <span class="product-tag">Smart</span>
+                <img src="assets/product-air-quality.png" alt="Air Quality Monitoring" />
+              </div>
+              <div class="product-meta">
+                <h3>Air Quality Monitoring</h3>
+                <a class="btn btn-gradient" href="#contact">Enquire now</a>
+              </div>
             </article>
           </div>
         </div>
@@ -812,7 +904,7 @@
         </div>
         <div class="proof-layout">
           <aside class="proof-visual">
-            <img src="assets/pembrokeshire.jpg" alt="Westcotec speed sign installed in Pembrokeshire" />
+            <img src="assets/pembrokeshire-crop.jpg" alt="Westcotec speed sign installed in Pembrokeshire" />
             <div class="caption">
               <strong>Case study · Pembrokeshire</strong>
               75 SIDs and 33 speed roundels supporting the County Council’s road safety programme.
